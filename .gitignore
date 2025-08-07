@@ -1,0 +1,11 @@
+build/
+devel/
+install/
+logs/
+*.pyc
+*.swp
+*.user
+*.launch~
+*.log
+*.bak
+
