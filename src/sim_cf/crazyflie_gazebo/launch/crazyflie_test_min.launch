@@ -1,0 +1,11 @@
+<launch>
+  <param name="use_sim_time" value="true"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find crazyflie_gazebo)/models/rotors_description/urdf/crazyflie_base.xacro'" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_cf1" output="screen"
+        args="-param robot_description -urdf -model cf1 -x 0 -y 0 -z 0.03" />
+</launch>
+

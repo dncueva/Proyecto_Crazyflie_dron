@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Args generales -->
+  <arg name="mav_name" default="crazyflie"/>
+  <arg name="world_name" default="basic"/>
+  <arg name="debug" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="true"/>
+  <arg name="verbose" default="true"/>
+
+  <!-- Swarm -->
+  <arg name="nbQuads" default="2"/>
+  <arg name="cfPrefix" default="cf"/>
+  <arg name="firstIndex" default="1"/>
+
+  <!-- Handler único para todos -->
+  <arg name="handlerName" default="handler1"/>
+  <arg name="uri" default="INADDR_ANY://19950"/>
+
+  <!-- logging/params -->
+  <arg name="enable_logging" default="true"/>
+  <arg name="enable_parameters" default="true"/>
+  <arg name="use_ros_time" default="true"/>
+  <arg name="enable_logging_imu" default="false"/>
+  <arg name="enable_logging_temperature" default="false"/>
+  <arg name="enable_logging_magnetic_field" default="false"/>
+  <arg name="enable_logging_pressure" default="false"/>
+  <arg name="enable_logging_battery" default="false"/>
+  <arg name="enable_logging_packets" default="false"/>
+
+  <!-- Gazebo env -->
+  <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find crazyflie_gazebo)/models"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find crazyflie_gazebo)/models"/>
+
+  <!-- Mundo -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find crazyflie_gazebo)/worlds/$(arg world_name).world"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
+  </include>
+
+  <!-- Spawner en Python: crea N drones llamando a spawn_mav.launch con ns y pose únicas -->
+  <node pkg="crazyflie_gazebo"
+        type="swarm_spawner.py"
+        name="swarm_spawner"
+        output="screen">
+    <param name="nbQuads" value="$(arg nbQuads)"/>
+    <param name="cfPrefix" value="$(arg cfPrefix)"/>
+    <param name="firstIndex" value="$(arg firstIndex)"/>
+    <param name="mav_name" value="$(arg mav_name)"/>
+    <!-- patrón de posiciones: circle|line|grid -->
+    <param name="layout" value="circle"/>
+    <param name="radius" value="1.0"/>
+    <param name="z0" value="0.03"/>
+  </node>
+
+  <!-- Handler que habla con todos los SITL (un solo puerto) -->
+  <group ns="$(arg handlerName)">
+    <include file="$(find crazyflie_gazebo)/launch/spawn_plugin.launch">
+      <arg name="plugin_name" value="$(arg handlerName)"/>
+      <arg name="nbQuads" value="$(arg nbQuads)"/>
+      <arg name="cfPrefix" value="$(arg cfPrefix)"/>
+      <arg name="firstIndex" value="$(arg firstIndex)"/>
+      <arg name="uri" value="$(arg uri)"/>
+
+      <arg name="enable_logging" value="$(arg enable_logging)"/>
+      <arg name="enable_parameters" value="$(arg enable_parameters)"/>
+      <arg name="use_ros_time" value="$(arg use_ros_time)"/>
+      <arg name="enable_logging_imu" value="$(arg enable_logging_imu)"/>
+      <arg name="enable_logging_temperature" value="$(arg enable_logging_temperature)"/>
+      <arg name="enable_logging_magnetic_field" value="$(arg enable_logging_magnetic_field)"/>
+      <arg name="enable_logging_pressure" value="$(arg enable_logging_pressure)"/>
+      <arg name="enable_logging_battery" value="$(arg enable_logging_battery)"/>
+      <arg name="enable_logging_packets" value="$(arg enable_logging_packets)"/>
+    </include>
+  </group>
+</launch>
+
+
