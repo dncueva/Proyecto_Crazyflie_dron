@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load custom Gazebo world -->
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="true"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find crazyflie_gazebo)/worlds/basic.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
+  </include>
+
+  <!-- Spawn Crazyflie 1 -->
+  <group ns="cf1">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find crazyflie_gazebo)/models/rotors_description/urdf/crazyflie.xacro'" />
+    <node name="spawn_cf1" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-param robot_description -urdf -model cf1 -x 1.0 -y 0.0 -z 0.03"/>
+  </group>
+
+  <!-- Spawn Crazyflie 2 -->
+  <group ns="cf2">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find crazyflie_gazebo)/models/rotors_description/urdf/crazyflie.xacro'" />
+    <node name="spawn_cf2" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-param robot_description -urdf -model cf2 -x -1.0 -y 0.0 -z 0.03"/>
+  </group>
+
+  <!-- Spawn Qupa robot -->
+  <group ns="qupa">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find qupa_description)/urdf/qupa.xacro'" />
+    <node name="spawn_qupa" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-param robot_description -urdf -model qupa -x 0 -y 2.0 -z 0.05"/>
+  </group>
+
+</launch>
+

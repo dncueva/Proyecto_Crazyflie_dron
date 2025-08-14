@@ -15,9 +15,9 @@
       <inertial>
         <mass>2.0</mass>
         <inertia>
-          <ixx>0.0216666666667</ixx>
-          <iyy>0.0216666666667</iyy>
-          <izz>0.04</izz>
+          <ixx>0.02166666666666667</ixx>
+          <iyy>0.02166666666666667</iyy>
+          <izz>0.04000000000000001</izz>
         </inertia>
       </inertial>
 
@@ -83,9 +83,9 @@
       <inertial>
           <mass>0.019</mass>
           <inertia>
-            <ixx>6.34916666667e-07</ixx>
-            <iyy>4.31078333333e-05</iyy>
-            <izz>4.37395833333e-05</izz>
+            <ixx>6.349166666666668e-07</ixx>
+            <iyy>4.310783333333334e-05</iyy>
+            <izz>4.373958333333334e-05</izz>
           </inertia>
         </inertial>
       <visual name="rotor_0_visual">
@@ -153,7 +153,7 @@
       <!--<cda_stall>-0.9233984055</cda_stall>-->
       <!--<cma_stall>0</cma_stall>-->
       <!--<cp>0.0825 0 0</cp>-->
-      <!--<area>0.0033</area>-->
+      <!--<area>0.0033000000000000004</area>-->
       <!--<air_density>1.2041</air_density>-->
       <!--<forward>0 1 0</forward>-->
       <!--<upward>0 0 1</upward>-->
@@ -170,7 +170,7 @@
       <!--<cda_stall>-0.9233984055</cda_stall>-->
       <!--<cma_stall>0</cma_stall>-->
       <!--<cp>0.0825 0 0</cp>-->
-      <!--<area>0.0033</area>-->
+      <!--<area>0.0033000000000000004</area>-->
       <!--<air_density>1.2041</air_density>-->
       <!--<forward>0 1 0</forward>-->
       <!--<upward>0 0 1</upward>-->
@@ -222,9 +222,9 @@
       <inertial>
           <mass>0.019</mass>
           <inertia>
-            <ixx>6.34916666667e-07</ixx>
-            <iyy>4.31078333333e-05</iyy>
-            <izz>4.37395833333e-05</izz>
+            <ixx>6.349166666666668e-07</ixx>
+            <iyy>4.310783333333334e-05</iyy>
+            <izz>4.373958333333334e-05</izz>
           </inertia>
         </inertial>
       <visual name="rotor_1_visual">
@@ -292,7 +292,7 @@
       <!--<cda_stall>-0.9233984055</cda_stall>-->
       <!--<cma_stall>0</cma_stall>-->
       <!--<cp>0.0825 0 0</cp>-->
-      <!--<area>0.0033</area>-->
+      <!--<area>0.0033000000000000004</area>-->
       <!--<air_density>1.2041</air_density>-->
       <!--<forward>0 1 0</forward>-->
       <!--<upward>0 0 1</upward>-->
@@ -309,7 +309,7 @@
       <!--<cda_stall>-0.9233984055</cda_stall>-->
       <!--<cma_stall>0</cma_stall>-->
       <!--<cp>0.0825 0 0</cp>-->
-      <!--<area>0.0033</area>-->
+      <!--<area>0.0033000000000000004</area>-->
       <!--<air_density>1.2041</air_density>-->
       <!--<forward>0 1 0</forward>-->
       <!--<upward>0 0 1</upward>-->
@@ -361,9 +361,9 @@
       <inertial>
           <mass>0.019</mass>
           <inertia>
-            <ixx>6.34916666667e-07</ixx>
-            <iyy>4.31078333333e-05</iyy>
-            <izz>4.37395833333e-05</izz>
+            <ixx>6.349166666666668e-07</ixx>
+            <iyy>4.310783333333334e-05</iyy>
+            <izz>4.373958333333334e-05</izz>
           </inertia>
         </inertial>
       <visual name="rotor_2_visual">
@@ -431,7 +431,7 @@
       <!--<cda_stall>-0.9233984055</cda_stall>-->
       <!--<cma_stall>0</cma_stall>-->
       <!--<cp>0.0825 0 0</cp>-->
-      <!--<area>0.0033</area>-->
+      <!--<area>0.0033000000000000004</area>-->
       <!--<air_density>1.2041</air_density>-->
       <!--<forward>0 -1 0</forward>-->
       <!--<upward>0 0 1</upward>-->
@@ -448,7 +448,7 @@
       <!--<cda_stall>-0.9233984055</cda_stall>-->
       <!--<cma_stall>0</cma_stall>-->
       <!--<cp>0.0825 0 0</cp>-->
-      <!--<area>0.0033</area>-->
+      <!--<area>0.0033000000000000004</area>-->
       <!--<air_density>1.2041</air_density>-->
       <!--<forward>0 -1 0</forward>-->
       <!--<upward>0 0 1</upward>-->
@@ -500,9 +500,9 @@
       <inertial>
           <mass>0.019</mass>
           <inertia>
-            <ixx>6.34916666667e-07</ixx>
-            <iyy>4.31078333333e-05</iyy>
-            <izz>4.37395833333e-05</izz>
+            <ixx>6.349166666666668e-07</ixx>
+            <iyy>4.310783333333334e-05</iyy>
+            <izz>4.373958333333334e-05</izz>
           </inertia>
         </inertial>
       <visual name="rotor_3_visual">
@@ -570,7 +570,7 @@
       <!--<cda_stall>-0.9233984055</cda_stall>-->
       <!--<cma_stall>0</cma_stall>-->
       <!--<cp>0.0825 0 0</cp>-->
-      <!--<area>0.0033</area>-->
+      <!--<area>0.0033000000000000004</area>-->
       <!--<air_density>1.2041</air_density>-->
       <!--<forward>0 -1 0</forward>-->
       <!--<upward>0 0 1</upward>-->
@@ -587,7 +587,7 @@
       <!--<cda_stall>-0.9233984055</cda_stall>-->
       <!--<cma_stall>0</cma_stall>-->
       <!--<cp>0.0825 0 0</cp>-->
-      <!--<area>0.0033</area>-->
+      <!--<area>0.0033000000000000004</area>-->
       <!--<air_density>1.2041</air_density>-->
       <!--<forward>0 -1 0</forward>-->
       <!--<upward>0 0 1</upward>-->
