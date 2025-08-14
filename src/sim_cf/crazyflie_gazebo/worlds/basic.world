@@ -1,24 +1,46 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
   <world name="default">
-    <!-- A global light source -->
+    <!-- Luz global -->
     <include>
       <uri>model://sun</uri>
     </include>
 
-    <!-- A ground plane -->
-    <include>
-      <uri>model://asphalt_plane</uri>
-      <pose>0 0 -0.03 0 0 0</pose>
-    </include>
-    
-    <!-- <include>
-      <uri>model://ground_plane</uri>
-    </include> -->
-    
-    <!-- Only one ROS interface plugin is required per world, as any other plugin can connect a Gazebo topic to a ROS topic (or vise versa). -->
-    <!--<plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>-->
+    <!-- Piso invisible con colisión -->
+    <model name="invisible_ground">
+      <static>true</static>
+      <link name="link">
+        <pose>0 0 -0.03 0 0 0</pose>
+        <!-- Colisión: plano grande -->
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>200 200</size>
+            </plane>
+          </geometry>
+        </collision>
+        <!-- Visual 100% transparente -->
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>200 200</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Transparent</name>
+            </script>
+          </material>
+          <transparency>1.0</transparency>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
 
+    <!-- Física -->
     <physics name='default_physics' default='0' type='ode'>
       <gravity>0 0 -9.8066</gravity>
       <ode>
@@ -40,16 +62,13 @@
       <real_time_update_rate>500</real_time_update_rate>
       <magnetic_field>6.0e-6 2.3e-5 -4.2e-5</magnetic_field>
     </physics>
+
+    <!-- Cámara inicial -->
     <gui fullscreen='0'>
       <camera name='user_camera'>
         <pose>-10 0 6 0 0.3 0</pose>
-        <!-- <view_controller>orbit</view_controller>
-        <projection_type>perspective</projection_type>
-        <track_visual>
-          <name>iris</name>
-          <use_model_frame>1</use_model_frame>
-        </track_visual> -->
       </camera>
     </gui>
   </world>
 </sdf>
+

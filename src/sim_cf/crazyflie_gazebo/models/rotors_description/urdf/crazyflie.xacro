@@ -158,7 +158,7 @@
 <!-- Cámara montada al frente -->
   <link name="crazyflie_camera_link">
     <inertial>
-      <mass value="0.012"/>  <!-- 12 gramos, por el peso de la camara 3gr y el procesador 9gr -->
+      <mass value="0.004"/>  <!-- 4 gramos de la camara -->
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia ixx="1e-7" ixy="0" ixz="0" iyy="1e-7" iyz="0" izz="1e-7"/>
     </inertial>
