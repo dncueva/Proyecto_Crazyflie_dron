@@ -1,0 +1,24 @@
+<launch>
+  <arg name="qupa" />
+
+  <arg name="robot_name" default="qupa"/>
+  <arg name="use_ir" default="true"/>
+  <arg name="high_res" default="true" /> 
+
+
+  <!--Create URDF from Xacro--> 
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find qupa_description)/urdf/qupa.xacro tf_prefix:=$(arg robot_name) use_ir:=$(arg use_ir) high_res:=$(arg high_res)"  />
+  
+  <!--Robot State Publisher publisher-->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg robot_name)" />
+    </node>
+
+  <!--Joint state publisher-->
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+
+  <!--Rviz Visualization-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qupa_description)/rviz/qupa.rviz" />
+
+</launch>

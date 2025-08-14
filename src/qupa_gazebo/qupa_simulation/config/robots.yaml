@@ -1,0 +1,4 @@
+robots:
+  - qp_1
+  - qp_2   # You can add more robots here
+publish_rate: 30  # Frecuencia en Hz

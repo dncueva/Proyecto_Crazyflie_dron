@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="world" value="TAM_experiment" />
+  <arg name="high_res" default="false" />
+  <arg name="num_tams" default="4" />
+  <env name="GAZEBO_MODEL_PATH" value="$(find qupa_simulation)/models" />
+
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find qupa_simulation)/worlds/$(arg world).world" />
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <node pkg="qupa_behavior" type="tam_assign.py" name="tam_assign" output="screen">
+    <param name="num_tams" value="$(arg num_tams)"/>
+  </node>
+
+  <group ns="qp_1">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find qupa_description)/urdf/qupa.xacro tf_prefix:=qp_1 high_res:=$(arg high_res)" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="qp_1" />
+    </node>
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model qp_1 -x -0.4 -y -0.1 -z 0.01 -Y 0.0 -param robot_description" />
+    <group unless="$(arg high_res)">
+      <node pkg="qupa_simulation" type="logical_camera_bridge" name="logical_camera_bridge_qp_1">
+        <param name="robot_namespace" value="qp_1" />
+      </node>
+    </group>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_qp_1" args="-0.4 -0.1 0.01 0.0 0 0 world qp_1/base_link" />
+
+    <!-- <node pkg="qupa_behavior" type="qupa_selective_strategy.py" name="qupa_selective_strategy_1" output="screen">
+      <param name="robot_name" value="qp_1"/>
+    </node> -->
+  </group>
+
+</launch>

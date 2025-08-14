@@ -1,0 +1,13 @@
+material paredes_material
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture wall.png
+            }
+        }
+    }
+}

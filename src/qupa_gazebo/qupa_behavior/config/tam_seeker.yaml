@@ -1,0 +1,18 @@
+tam_seeker:
+  ros__parameters:
+    max_linear: 0.10           # [m/s] Velocidad lineal máxima
+    max_angular: 0.5           # [rad/s] Velocidad angular máxima
+    angle_threshold: 0.2       # [rad] Ángulo máximo para ir al frente (~11°)
+    scan_min_dist: 0.13        # [m] Distancia mínima LIDAR para obstáculo
+    only_forward: true         # Solo ir hacia adelante (true) o también reversa
+    search_window: 9           # Muestras alrededor del centro del LIDAR
+    recovery_time: 0.7         # [s] Tiempo girando si se atora
+    spin_rate: 10              # [Hz] Frecuencia del nodo
+    throttle_print: 1.0        # [s] Intervalo de logs
+    dist_thresh: 0.07          # [m] Distancia para considerar que llegó al TAM
+    align_thresh_deg: 5        # [°] Tolerancia para estar alineado
+    backward_thresh_deg: 135   # [°] Ángulo para considerar reversa
+    zona_muerta_deg: 8         # [°] Zona muerta de giro
+    task_time: 10.0            # [s] Tiempo de "tarea" en el TAM
+    num_tams: 24
+    robot_name: qp_1

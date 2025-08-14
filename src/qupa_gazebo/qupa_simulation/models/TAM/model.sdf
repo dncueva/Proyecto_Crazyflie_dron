@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="TAM">
+    <static>true</static>
+    <link name="base_link">
+      <!-- Visual original del modelo (blanco por default) -->
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://TAM/meshes/TAM.stl</uri>
+            <scale>1 1.2 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+
+      <!-- Visual adicional (rectángulo para cambio dinámico de color) -->
+      <visual name="task_indicator">
+        <pose>-0.105 0 0.12 0 0 0</pose> <!-- Ajusta la posición según necesidad -->
+        <geometry>
+          <box>
+            <size>0.01 0.24 0.12</size> <!-- Ajusta tamaño según necesidad -->
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>1 1 1 1</emissive> <!-- Brillo inicial (blanco standby) -->
+        </material>
+        <!-- Plugin de color  -->
+        <plugin name="tam_color_plugin" filename="libTAMColorPlugin.so"/>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://TAM/meshes/TAM.stl</uri>
+            <scale>1 1.2 1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>

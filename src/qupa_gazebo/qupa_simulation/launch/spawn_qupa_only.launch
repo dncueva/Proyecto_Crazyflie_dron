@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Args opcionales -->
+  <arg name="qupa_name" default="qp_1"/>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="2.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="yaw" default="1.57"/>
+  <arg name="high_res" default="false"/>
+
+  <!-- robot_description desde xacro -->
+  <param name="robot_description"
+         command="$(find xacro)/xacro --inorder '$(find qupa_description)/urdf/qupa.xacro' tf_prefix:=$(arg qupa_name) high_res:=$(arg high_res)" />
+
+  <!-- State publisher -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <param name="tf_prefix" value="$(arg qupa_name)" />
+  </node>
+
+  <!-- Spawn en Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -model $(arg qupa_name) -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg yaw) -param robot_description"
+        output="screen" />
+
+  <!-- Logical camera bridge -->
+  <group unless="$(arg high_res)">
+    <node pkg="qupa_simulation" type="logical_camera_bridge" name="logical_camera_bridge_$(arg qupa_name)">
+      <param name="robot_namespace" value="$(arg qupa_name)" />
+    </node>
+  </group>
+
+  <!-- TF estático -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_$(arg qupa_name)"
+        args="$(arg x) $(arg y) $(arg z) $(arg yaw) 0 0 world $(arg qupa_name)/base_link" />
+
+</launch>
+

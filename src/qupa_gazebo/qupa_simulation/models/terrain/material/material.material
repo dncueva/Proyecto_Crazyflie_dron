@@ -1,0 +1,13 @@
+material terrain_material
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture asphalt.jpeg
+            }
+        }
+    }
+}

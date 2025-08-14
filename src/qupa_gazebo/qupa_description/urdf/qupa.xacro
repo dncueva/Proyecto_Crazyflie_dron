@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="$(arg tf_prefix)">
+
+    <xacro:property name="M_PI" value="3.1415926535897931" />
+    <xacro:property name="tf_prefix" default=""/>
+    <!-- <xacro:property name="use_ir" value="$(arg use_ir)" lazy_eval="false"/> -->
+    <xacro:property name="high_res" value="$(arg high_res)" lazy_eval="false"/>
+    
+    <!--Include Xacro files -->
+    <xacro:include filename="$(find qupa_description)/urdf/wheels/wheel.xacro" />                   <!--wheel properties and links definitions-->
+    <xacro:include filename="$(find qupa_description)/urdf/sensors/infrared.xacro" />               <!--infrared sensor properties and links definitions-->
+    <xacro:include filename="$(find qupa_description)/urdf/sensors/mirror.xacro" />              <!--logical camera properties and links definitions, the mirror acts as a 'camera'-->
+    <xacro:include filename="$(find qupa_description)/urdf/bases/base.xacro" />                     <!--base properties and links definitions-->
+    <xacro:include filename="$(find qupa_description)/urdf/gazebo_plugins.xacro" />                 <!--Gazebo plugins definitions-->
+    <xacro:include filename="$(find qupa_description)/urdf/sensors/color.xacro" />
+    <xacro:include filename="$(find qupa_description)/urdf/wheels/caster.xacro" />    
+    
+    <material name="dark">
+        <color rgba="0.3 0.3 0.3 1.0"/>
+    </material>
+    <material name="light_black">
+        <color rgba="0.4 0.4 0.4 1.0"/>
+    </material>
+    <material name="gray">
+        <color rgba="0.4 0.4 0.4 1.0"/>
+    </material>
+
+    <xacro:base/>               <!--Base Macro-->
+    <xacro:mirror/>             <!--Mirror Macro-->
+    <!-- Wheels Macro-->
+    <xacro:wheel 
+        wheel_name="R_wheel" 
+        wheel_joint_name="R_wheel_joint" 
+        wheel_parent_name="base_link" 
+        wheel_joint_origin_xyz="-0 0.0415 0.016" 
+        wheel_joint_origin_rpy=" 1.5708 0 3.1416" />
+    <xacro:wheel 
+        wheel_name="L_wheel" 
+        wheel_joint_name="L_wheel_joint" 
+        wheel_parent_name="base_link" 
+        wheel_joint_origin_xyz="0 -0.0415 0.016" 
+        wheel_joint_origin_rpy=" 1.5708 0 0" />
+    <xacro:caster
+        link_name = "caster_R"
+        joint_name = "caster_R_joint"
+        joint_origin_xyz = "0.0305 -0.0265 0.005"/>
+    <xacro:caster
+        link_name = "caster_L"
+        joint_name = "caster_L_joint"
+        joint_origin_xyz = "0.0305 0.0265 0.005"/>
+    <xacro:caster
+        link_name = "caster_B"
+        joint_name = "caster_B_joint"
+        joint_origin_xyz = "-0.0325 0 0.005"/>
+    
+    
+ 
+    <xacro:infrared 
+        joint_origin_xyz="0.00 0 0.034"
+        joint_origin_rpy="1.5708 0 0" />
+
+    <xacro:ir_sensor link_name="ir_0" 
+        joint_name="ir_0_joint" 
+        joint_origin_xyz="0.004 -0.056 0.034"
+        joint_origin_rpy="${M_PI/2} 0 0" />
+
+    <xacro:ir_sensor link_name="ir_45" 
+        joint_name="ir_45_joint" 
+        joint_origin_xyz="0.04159 -0.0376 0.034" 
+        joint_origin_rpy="${M_PI/2} 0 ${M_PI/4}" />
+    
+    <xacro:ir_sensor link_name="ir_90" 
+        joint_name="ir_90_joint" 
+        joint_origin_xyz="0.056 0 0.034" 
+        joint_origin_rpy="${M_PI/2} 0 ${M_PI/2}" />
+    
+    <xacro:ir_sensor link_name="ir_135" 
+        joint_name="ir_135_joint" 
+        joint_origin_xyz="0.04159 0.0376 0.034" 
+        joint_origin_rpy="${M_PI/2} 0 ${3*M_PI/4}" />
+
+    <xacro:ir_sensor link_name="ir_180" 
+        joint_name="ir_180_joint" 
+        joint_origin_xyz="0.004 0.056 0.034" 
+        joint_origin_rpy="${M_PI/2} 0 ${M_PI}" />
+
+    <xacro:ir_sensor link_name="ir_270" 
+        joint_name="ir_270_joint" 
+        joint_origin_xyz="-0.056 0 0.034" 
+        joint_origin_rpy="${M_PI/2} 0 ${-M_PI/2}" />
+
+
+
+
+    <xacro:if value="${high_res}">
+        <xacro:color_camera/>
+        <xacro:real_cam/>
+    </xacro:if>
+    <xacro:unless value="${high_res}">
+        <xacro:log_cam/>            <!--Logical Camera Macro-->
+    </xacro:unless>
+
+  </robot>
